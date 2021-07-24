@@ -1,5 +1,6 @@
 package com.example.study.model.entity;
 
+import com.example.study.model.enumclass.PartnerType;
 import jdk.jfr.Enabled;
 import lombok.*;
 import lombok.experimental.Accessors;
@@ -26,7 +27,8 @@ public class Partner {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private PartnerType status;
     private String address;
     private String callCenter;
     private String partnerNumber;

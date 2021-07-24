@@ -1,12 +1,13 @@
 package com.example.study.controller;
 
 import com.example.study.model.network.Header;
+import com.example.study.service.BaseService;
 import ifs.CrudInterface;
 import org.springframework.web.bind.annotation.*;
 
 public abstract class CrudController <Req,Res>implements CrudInterface<Req,Res> {
 
-    protected CrudInterface<Req,Res> baseService;
+    protected BaseService<Req,Res> baseService;
 
     @Override
     @PostMapping("")

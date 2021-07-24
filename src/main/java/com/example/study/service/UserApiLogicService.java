@@ -17,6 +17,7 @@ import java.util.Optional;
 public class UserApiLogicService implements CrudInterface<UserApiRequest, UserApiResponse> {
     @Autowired
     private UserRepository userRepository;
+
     // 1. request data
     // 2. user 생성
     // 3. 생성된 데이터 -> UserApiResponse return

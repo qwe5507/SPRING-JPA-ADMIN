@@ -8,9 +8,11 @@ import com.example.study.repository.ItemRepository;
 import com.example.study.repository.PartnerRepository;
 import ifs.CrudInterface;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class ItemApiLogicService extends BaseService<ItemApiRequest, ItemApiResponse,Item> {
@@ -68,6 +70,11 @@ public class ItemApiLogicService extends BaseService<ItemApiRequest, ItemApiResp
                 })
                 .orElseGet(()-> Header.ERROR("데이터 없음") );
 
+    }
+
+    @Override
+    public Header<List<ItemApiResponse>> search(Pageable pageable) {
+        return null;
     }
 
     private Header<ItemApiResponse> response (Item item){

@@ -51,6 +51,6 @@ public class User {
     private List<OrderGroup> orderGroups;
 
     // USER 1 : N  Settlement
-    @OneToOne(mappedBy = "userId")
+    @OneToOne(mappedBy = "user")
     private Settlement settlement;
 }

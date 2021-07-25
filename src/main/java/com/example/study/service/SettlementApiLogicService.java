@@ -49,7 +49,7 @@ public class SettlementApiLogicService extends BaseService<SettlementApiRequest,
     }
     private Header<SettlementApiResponse> response(Settlement settlement){
         SettlementApiResponse body = SettlementApiResponse.builder()
-                .userId(settlement.getUserId().getId())
+                .userId(settlement.getUser().getId())
                 .price(settlement.getPrice())
 
                 .build();

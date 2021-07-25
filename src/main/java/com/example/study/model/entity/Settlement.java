@@ -18,8 +18,10 @@ import java.math.BigDecimal;
 @Accessors(chain = true)
 public class Settlement implements Serializable {
     @Id
-    @OneToOne
-    private User userId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long Id;
     private BigDecimal price;
+    @OneToOne
+    private User user;
 
 }

@@ -18,7 +18,7 @@ import java.util.List;
 @Entity
 @NoArgsConstructor
 //@Table(name = "user")
-@ToString(exclude = {"orderGroup"})
+@ToString(exclude = {"orderGroup","settlement"})
 @EntityListeners(AuditingEntityListener.class)
 @Builder
 @Accessors(chain = true)
@@ -49,4 +49,8 @@ public class User {
     // USER 1 : N  OrderGroup
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "user")
     private List<OrderGroup> orderGroups;
+
+    // USER 1 : N  Settlement
+    @OneToOne(mappedBy = "userId")
+    private Settlement settlement;
 }

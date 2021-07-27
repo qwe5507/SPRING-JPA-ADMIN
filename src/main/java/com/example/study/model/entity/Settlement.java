@@ -12,17 +12,10 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @Entity
 @NoArgsConstructor
-@ToString(exclude = {"user"})
 @EntityListeners(AuditingEntityListener.class)
-@Builder
 @Accessors(chain = true)
-public class Settlement implements Serializable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
+@DiscriminatorValue("settlement")
+public class Settlement extends User {
     private BigDecimal price;
-    @OneToOne
-    private User user;
-
 // test22
 }

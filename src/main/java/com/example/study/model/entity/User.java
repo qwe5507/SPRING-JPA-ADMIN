@@ -18,10 +18,12 @@ import java.util.List;
 @Entity
 @NoArgsConstructor
 //@Table(name = "user")
-@ToString(exclude = {"orderGroup","settlement"})
+@ToString(exclude = {"orderGroup"})
 @EntityListeners(AuditingEntityListener.class)
 @Builder
 @Accessors(chain = true)
+@Inheritance(strategy = InheritanceType.JOINED)
+//@DiscriminatorColumn //D타입?
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -51,6 +53,6 @@ public class User {
     private List<OrderGroup> orderGroups;
 
     // USER 1 : N  Settlement
-    @OneToOne(mappedBy = "user")
-    private Settlement settlement;
+//    @OneToOne(mappedBy = "user")
+//    private Settlement settlement;
 }

@@ -2,11 +2,13 @@ package com.example.study.service;
 
 import com.example.study.model.entity.Item;
 import com.example.study.model.entity.OrderGroup;
+import com.example.study.model.entity.Settlement;
 import com.example.study.model.network.Header;
 import com.example.study.model.network.request.OrderGroupApiRequest;
 import com.example.study.model.network.response.ItemApiResponse;
 import com.example.study.model.network.response.OrderGroupApiResponse;
 import com.example.study.repository.OrderGroupRepository;
+import com.example.study.repository.SettlementRepository;
 import com.example.study.repository.UserRepository;
 import ifs.CrudInterface;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,12 +17,15 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class OrderGroupApiLogicService extends BaseService<OrderGroupApiRequest, OrderGroupApiResponse,OrderGroup> {
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private SettlementRepository settlementRepository;
 
     @Override
     public Header<OrderGroupApiResponse> create(Header<OrderGroupApiRequest> req) {
@@ -39,6 +44,12 @@ public class OrderGroupApiLogicService extends BaseService<OrderGroupApiRequest,
                 .build();
 
         OrderGroup newOrderGroup = baseRepository.save(orderGroup);
+
+        settlementRepository.findById(orderGroup.getUser().getId())
+                .map(settlement -> settlement.setPrice(settlement.getPrice().add(orderGroup.getTotalPrice())))
+                .map(settlement -> settlementRepository.save(settlement));
+
+
         return response(newOrderGroup);
     }
 
